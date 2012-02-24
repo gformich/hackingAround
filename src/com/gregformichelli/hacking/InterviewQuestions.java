@@ -2,12 +2,14 @@ package com.gregformichelli.hacking;
 
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 public class InterviewQuestions {
 	
@@ -267,11 +269,53 @@ public class InterviewQuestions {
 		return result;
 	}
 	
+	/**
+	 * Uses a little trick from Hackers delight
+	 * @param num
+	 * @return
+	 */
 	public static boolean isPowerOf2_binary(int num) {
 		if(num == 0) return false;
 		
 		num = Math.abs(num);
 		return ( (num & (num - 1)) == 0);
 	}
+	
+	/**
+	 * Kind of weird for Java since strings are immutable and I am trying a C style algorithm
+	 * just going through some interview stuff, and doing the in place thing
+	 * 
+	 * @param str
+	 * @param toRemove
+	 * @return
+	 */
+	public static String removeCharsFromString(String str, Character[] toRemove) {
+		
+		// construct a hashset of removal characters
+		Set<Character> charsToRemove = new HashSet<Character>(Arrays.asList(toRemove));
+		
+		// go through the character array in place
+		// omit any characters in the remove set
+		int dest = 0;
+		char[] strContent = str.toCharArray();
+		for(char c : strContent) {
+			if(! charsToRemove.contains(c)) {
+				strContent[dest++] = c;
+			}
+		}
+		
+		return new String(strContent, 0, dest);
+	}
+	
+	// Normal Java character removal
+	public static String removeCharsEasy(String str, Character[] removes) {
+		StringBuilder sb = new StringBuilder();
+		for(Character c: removes) {
+			sb.append(c);
+		}
+		String regex = String.format("[%s]", sb.toString());
+		return str.replaceAll(regex, "");
+	}
+	
 
 }

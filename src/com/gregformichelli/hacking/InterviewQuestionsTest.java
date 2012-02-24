@@ -181,5 +181,16 @@ public class InterviewQuestionsTest extends InterviewQuestions {
 			assertFalse(InterviewQuestions.isPowerOf2_binary(num));
 		}
 	}
+	
+	@Test
+	public void testRemoveCharsFromString() throws Exception {
+		
+		String s = "abcdefghzz23";
+		Character [] remove = {'z', '2'};
+		String result = InterviewQuestions.removeCharsFromString(s, remove);
+		assertEquals(result, "abcdefgh3");
+		result = InterviewQuestions.removeCharsEasy(s, remove);
+		assertEquals(result, "abcdefgh3");
+	}
 
 }
