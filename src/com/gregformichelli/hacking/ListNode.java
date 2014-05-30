@@ -13,6 +13,10 @@ public class ListNode {
 		return data;
 	}
 	
+	public void setData(String data) {
+		this.data = data;
+	}
+	
 	public ListNode getNext() {
 		return next;
 	}

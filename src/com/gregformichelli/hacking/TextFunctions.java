@@ -62,6 +62,101 @@ public class TextFunctions {
 		return sb.toString();
 	}
 	
+	public static int findSubString_naive(String str, String sub) {
+		
+		// check for empty string or null
+		
+		int i = 0;
+		for(char c : str.toCharArray()) {
+			i++;
+			if( c == sub.charAt(0)) {
+				for(int j=1; j<sub.length(); j++) {
+					if(sub.indexOf(j) == str.indexOf(j+i)) {
+						break;
+					}
+					if(j == sub.length() -1 ) {
+						return i;
+					}
+				}
+			}
+		}
+		return -1;
+	}
+	
 
+//	public static int findSubString_boyer_moore() {
+//		
+//	}
+	
+	public static boolean containsUniqueChars(String source) {
+		
+		// assuming single byte character
+		boolean [] chars_seen = new boolean[256];
+		
+		char[] srcChars = source.toCharArray();
+		for(int i=0; i<source.length(); i++) {
+			char c = srcChars[i];
+			if(chars_seen[c] == true) {
+				return false;
+			}
+			else {
+				chars_seen[c] = true;
+			}
+		}
+		
+		return true;
+	}
+	
+	public static void reverse(char[] str) {
+		
+		char temp;
+		int end = str.length - 1;
+		int begin = 0;
+		while(begin < end) {
+			temp = str[begin];
+			str[begin++] = str[end];
+			str[end--] = temp;
+		}
+		
+	}
+	
+	public static boolean isAnagram(String one, String two) {
+		if(one.length() != two.length()) {
+			return false;
+		}
+		
+		HashMap<Character, Integer> letterCount = new HashMap<Character, Integer>();
+		// count the letter occurrences of one
+		for(char c: one.toCharArray()) {
+			if(letterCount.containsKey(c)) {
+				letterCount.put( c, letterCount.get(c) + 1 );
+			}
+			else {
+				letterCount.put(c, 1);
+			}
+		}
+		
+		int numberOfUniqueChars = letterCount.size();
+		int zeroedOutChars = 0;
+		// decrement the occurrences of one based on chars in two
+		for(char c : two.toCharArray()) {
+			if( letterCount.containsKey(c)){
+				int newCount = letterCount.get(c) - 1;
+				letterCount.put( c, newCount);
+				if(newCount == 0) {
+					zeroedOutChars++;
+					if (zeroedOutChars == numberOfUniqueChars) {
+						return true;
+					}
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		
+		
+		return false;
+	}
 
 }

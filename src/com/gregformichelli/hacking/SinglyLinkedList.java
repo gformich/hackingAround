@@ -102,18 +102,56 @@ public class SinglyLinkedList {
 		
 		ListNode current = head;
 		ListNode prev = null;
+		ListNode next = null;
 		
 		while( current != null) {
-			
-			// swap the direction of next pointer to previous node
+			next = current.getNext();
 			current.setNext(prev);
 			prev = current;
-			current = current.getNext();
+			current = next;
 		}
-		// set head
+		// set head since it's presently pointing at the tail
 		head = prev;
-		
 	}
+	
+	/**
+	 * only works if the node isn't the head
+	 * @param n
+	 */
+	public boolean delete(ListNode n) {
+		
+		if(n == null || n.getNext() == null ) {
+			return false;
+		}
+		
+		ListNode next = n.getNext();
+		n.setData(next.getData());
+		n.setNext(next.getNext());
+		return true;
+	}
+	
+	public boolean isCircular() {
+		
+		ListNode nodeSlow = head;
+		ListNode nodeFast = head;
+		
+		while(nodeFast.getNext() != null) {
+			nodeSlow = nodeSlow.getNext();
+			// move double
+			nodeFast = nodeFast.getNext().getNext();
+			if(nodeSlow == nodeFast) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	
+//	public SinglyLinkedList add(SinglyLinkedList list1, SinglyLinkedList list2) {
+//		
+//		
+//	}
 
 
 }

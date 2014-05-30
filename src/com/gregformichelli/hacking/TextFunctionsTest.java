@@ -22,5 +22,14 @@ public class TextFunctionsTest {
 		assertEquals("sentence dummy a just is This", reversed);
 		
 	}
+	
+	@Test
+	public void testRevers() {
+		String foo = "foo";
+		char [] reversed = foo.toCharArray();
+		TextFunctions.reverse(reversed);
+		char [] expected = new char [] {'o', 'o', 'f'};
+		assertEquals( reversed, expected);
+	}
 
 }

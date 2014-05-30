@@ -61,7 +61,8 @@ public class TowerOfHanoi {
 
 		if (h >= 1) {
 			// recursive approach
-			// move the tower minus the largest disk to the "with" peg
+			// move the tower minus the largest disk (bottom) to the "with" peg
+			// the "with" peg is a staging point for the move
 			hanoi(h - 1, from, with, to);
 			// move the largest disc to the destination
 			moveDisc(discs[h - 1], from, to);

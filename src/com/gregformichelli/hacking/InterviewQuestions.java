@@ -6,12 +6,68 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
-import java.util.regex.Pattern;
 
 public class InterviewQuestions {
+	
+	
+	public static boolean isBalanced(String str) {
+		
+		if( null == str || str.isEmpty() ) {
+			return true;
+		}
+		
+		Map<Character, Character> openToCloseMap = new HashMap<Character, Character>();
+		openToCloseMap.put('(', ')');
+		openToCloseMap.put('{', '}');
+		openToCloseMap.put('[', ']');
+		
+		Stack<Character> expectedClosingParens = new Stack<Character>();
+		
+		for(char c : str.toCharArray()) {
+			if(openToCloseMap.containsKey(c)) {
+				expectedClosingParens.push(openToCloseMap.get(c));
+			}
+			else if(openToCloseMap.containsValue(c) && c != expectedClosingParens.pop()) {
+				return false;
+			}
+		}
+		
+		return (expectedClosingParens.size() == 0);
+	}
+	
+	/**
+	 * Checks if a String is balanced in terms of parenthesis
+	 */
+	public static boolean isBalanced_recursive(String str, int idx, Stack<Character> expected) {
+		
+		Map<String, String> openToCloseMap = new HashMap<String, String>();
+		openToCloseMap.put("(", ")");
+		openToCloseMap.put("{", "}");
+		openToCloseMap.put("[", "]");
+
+		if (idx == str.length()) {
+	        return expected.isEmpty();
+	    }
+
+	    char c = str.charAt(idx);
+	    /* expecting something and it is a closing type */
+	    /* then it should match expecting type */
+	    if (openToCloseMap.values().contains(c)) {
+	        char e = expected.isEmpty() ? '\0' : expected.pop();
+	        if(e != c)
+	            return false;
+	    }
+	    
+	    if(openToCloseMap.containsKey(c)) {
+	    	expected.push(openToCloseMap.get(c).charAt(0));
+	    }
+
+	    return isBalanced_recursive(str, idx++, expected);
+	}
 	
 	public static void printAscii(int num) {
 		
@@ -263,6 +319,7 @@ public class InterviewQuestions {
 		while(num % 2 == 0) {
 			num /= 2;
 		}
+		// converged on 2
 		if(num == 1 || num == -1) {
 			result = true;
 		}
@@ -315,6 +372,24 @@ public class InterviewQuestions {
 		}
 		String regex = String.format("[%s]", sb.toString());
 		return str.replaceAll(regex, "");
+	}
+	
+	public static int binarySearch(int key, int[] arr) {
+		int lo = 0;
+		int hi = arr.length - 1;
+		while(lo<= hi) {
+			int mid = lo + ((hi - lo)/2);
+			if(arr[mid] < key) {
+				hi = mid - 1;
+			}
+			else if(arr[mid] > key) {
+				lo = mid + 1;
+			}
+			else {
+				return mid;
+			}
+		}
+		return -1;
 	}
 	
 

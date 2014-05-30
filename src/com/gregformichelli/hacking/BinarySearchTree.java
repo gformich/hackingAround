@@ -1,5 +1,7 @@
 package com.gregformichelli.hacking;
 
+import java.util.List;
+
 public class BinarySearchTree {
 	
 	private TreeNode root;
@@ -140,6 +142,17 @@ public class BinarySearchTree {
 			return maxDepth + 1;
 		}
 	}
+	
+	// build from sorted list
+//	public BinarySearchTree(List<Integer> list, int startIdx, int endIdx) {
+//		int mid = startIdx + ((endIdx-startIdx)/2);
+//		root = new TreeNode(list.indexOf(mid));
+//		// build left from lhs of array
+//		root.setLeft (new BinarySearchTree(list,startIdx, mid).getRoot());
+//		// build right from rhs of array (larger nums)
+//		root.setRight(new BinarySearchTree(list, mid+1, end).getRoot());	
+//				
+//	}
 	
 	
 

@@ -10,6 +10,24 @@ import java.util.List;
 import org.junit.Test;
 
 public class InterviewQuestionsTest extends InterviewQuestions {
+	
+	@Test
+	public void testIsBalanced() {
+		String tester = "";
+		assertTrue( InterviewQuestions.isBalanced(tester));
+		
+		tester = "(";
+		assertFalse( InterviewQuestions.isBalanced(tester));
+		
+		tester = "{67]";
+		assertFalse( InterviewQuestions.isBalanced(tester));
+		
+		tester = "[eee}}";
+		assertFalse( InterviewQuestions.isBalanced(tester));
+		
+		tester = "(999uuui)";
+		assertTrue( InterviewQuestions.isBalanced(tester));
+	}
 
 	@Test
 	public void testDecomposeNumber() {

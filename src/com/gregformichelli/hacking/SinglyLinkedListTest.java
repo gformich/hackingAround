@@ -62,7 +62,7 @@ public class SinglyLinkedListTest {
 		
 		SinglyLinkedList l2 = new SinglyLinkedList();
 		// put different nodes in here or else we'd corrupt the list
-		ListNode headNode = new ListNode("head Node");
+		ListNode headNode = new ListNode("head");
 		ListNode node1 = new ListNode("node one");
 		ListNode node2 = new ListNode("node two");
 		ListNode node3 = new ListNode("node three");
@@ -74,9 +74,15 @@ public class SinglyLinkedListTest {
 		
 		l2.reverse();
 		
-		assertEquals("node three", l2.get(0));
-		assertEquals("node two", l2.get(1));
-		assertEquals("node one", l2.get(2));
+		assertEquals("head", l2.get(0));
+		assertEquals("node three", l2.get(1));
+		assertEquals("node two", l2.get(2));
+		assertEquals("node one", l2.get(3));
+		
+		// Reverse and empty list
+		SinglyLinkedList emptyList = new SinglyLinkedList();
+		emptyList.reverse();
+		
 	}
 
 }

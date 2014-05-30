@@ -2,6 +2,22 @@ package com.gregformichelli.hacking;
 
 public class BitTwiddling {
 	
+	public static int countSetBits(int foo) {
+		int i = 0;
+		
+		// handle sign bit 
+		if( foo < 0){
+			i++;
+			foo = Math.abs(foo);
+		}
+		
+		for (; foo > 0; i++)
+		{
+		  foo &= (foo - 1); // clear the least significant bit set
+		}
+		return i;
+	}
+	
 	public static int reverseBits(int foo) {
 		
 		// won't work for signed ints
@@ -17,7 +33,7 @@ public class BitTwiddling {
 
 		// right shift v each iteration
 		// left shift r
-		for (v >>= 1; v>0; v >>= 1)
+		for (v >>= 1; v > 0; v >>= 1)
 		{   
 		  r <<= 1;
 		  r |= v & 1;
